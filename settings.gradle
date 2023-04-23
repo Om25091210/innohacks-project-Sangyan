@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "innohacks project"
 include ':app'
+include ':mylib'

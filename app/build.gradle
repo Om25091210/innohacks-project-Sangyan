@@ -59,10 +59,21 @@ dependencies {
     //browser
     implementation 'androidx.browser:browser:1.4.0'
 
+    // Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
-    
 
+    //Fragment pager adapter
+    implementation 'androidx.navigation:navigation-fragment:2.5.0'
+    implementation 'androidx.navigation:navigation-ui:2.5.0'
+    //Lottie
+    implementation "com.airbnb.android:lottie:3.7.0"
+    //tablayout
+    implementation 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
+    //library
+    implementation project(':mylib')
 }
