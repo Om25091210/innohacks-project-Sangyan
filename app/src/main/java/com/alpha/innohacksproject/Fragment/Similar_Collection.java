@@ -37,6 +37,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+
 public class Similar_Collection extends Fragment {
 
     View view;

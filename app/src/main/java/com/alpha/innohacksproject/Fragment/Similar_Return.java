@@ -24,6 +24,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alpha.innohacksproject.Adapter.similarAdapter;
+import com.alpha.innohacksproject.Adapter.similarAdapter2;
+import com.alpha.innohacksproject.Home.Model.Excel_data;
 import com.alpha.innohacksproject.Home.Model.filterdata;
 import com.alpha.innohacksproject.R;
 import com.google.firebase.database.DataSnapshot;
