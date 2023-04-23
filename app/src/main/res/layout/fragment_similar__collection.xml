@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/use_bg"
+    android:clickable="true"
+    android:id="@+id/swipe_refresh_layout"
+    android:focusable="true"
+    tools:context=".Fragments.Mcrc_Rm_Coll">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:paddingBottom="30dp"
+        android:layout_height="match_parent">
+
+        <soup.neumorphism.NeumorphCardView
+            android:id="@+id/neumorphCardView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:neumorph_shadowColorDark="@color/gray"
+            app:neumorph_shadowColorLight="@color/white"
+            app:neumorph_shadowElevation="5dp"
+            app:neumorph_shapeType="basin"
+            tools:ignore="MissingConstraints">
+
+            <EditText
+                android:id="@+id/search"
+                android:textSize="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_weight="8"
+                android:alignmentMode="alignMargins"
+                android:autofillHints="search"
+                android:background="@null"
+                android:drawableStart="@drawable/ic_baseline_search_24"
+                android:drawablePadding="5dp"
+                android:hint="@string/search_here"
+                android:inputType="textNoSuggestions"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="10dp"
+                android:textAlignment="textStart"
+                android:textColor="@color/blue_grey_800"
+                android:textColorHint="@color/blue_grey_800" />
+
+        </soup.neumorphism.NeumorphCardView>
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="@string/showing_similar_kind_of_case_files"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/neumorphCardView2" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/image"
+            android:src="@drawable/cg_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_data"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/fredokaregular"
+            android:textColor="@color/use_orange"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
