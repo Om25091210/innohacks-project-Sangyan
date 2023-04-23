@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "1059294088093-raqetnfje90elsrvlt1mvdr38su60g0t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alpha.innohacksproject",
+            "certificate_hash": "47029b032ceecee323101c5ed2faed80c6c8f71b"
+          }
+        },
+        {
           "client_id": "1059294088093-ep5hjre49m10vpjh6789b4imt6f30ec6.apps.googleusercontent.com",
           "client_type": 3
         }
