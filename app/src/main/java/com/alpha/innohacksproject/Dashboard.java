@@ -7,6 +7,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,7 +18,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
+import com.alpha.innohacksproject.Fragment.DistrictData;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,6 +34,8 @@ public class Dashboard extends AppCompatActivity {
 
     Toolbar toolbar;
     NavigationView navView;
+    LinearLayout police_contacts;
+    OnBackPressedListener onBackpressedListener;
     DrawerLayout drawer;
 
     @Override
@@ -42,6 +48,7 @@ public class Dashboard extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         navView = findViewById(R.id.navView);
         drawer = findViewById(R.id.drawer1);
+        police_contacts = findViewById(R.id.linearLayout);
 
         //set default home fragment and its title
         //Objects.requireNonNull(getSupportActionBar()).setTitle("");
@@ -124,6 +131,13 @@ public class Dashboard extends AppCompatActivity {
                 return true;
             }
         });
+
+        police_contacts.setOnClickListener(v -> Dashboard.this.getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
+                .add(R.id.drawer, new DistrictData(),"dashboard_frag")
+                .addToBackStack(null)
+                .commit());
     }
     private void setStatusBarTransparent () {
         Window window = Dashboard.this.getWindow();
@@ -134,4 +148,35 @@ public class Dashboard extends AppCompatActivity {
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         window.setStatusBarColor(Color.TRANSPARENT);
     }
+
+    @Override
+    public void onBackPressed() {
+        Fragment test = getSupportFragmentManager().findFragmentByTag("dashboard_frag");
+        if (test != null && test.isVisible()) {
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            if (fm.getBackStackEntryCount() > 0) {
+                fm.popBackStack();
+            }
+            ft.commit();
+        } else {
+            finish();
+            super.onBackPressed();
+        }
+    }
+
+    public interface OnBackPressedListener {
+        void doBack();
+    }
+
+    public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
+        this.onBackpressedListener = onBackPressedListener;
+    }
+
+    @Override
+    protected void onDestroy() {
+        onBackpressedListener = null;
+        super.onDestroy();
+    }
+
 }
