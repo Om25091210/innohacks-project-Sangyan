@@ -22,6 +22,8 @@ import android.widget.LinearLayout;
 
 import com.alpha.innohacksproject.Fragment.DistrictData;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,6 +37,8 @@ public class Dashboard extends AppCompatActivity {
     Toolbar toolbar;
     NavigationView navView;
     LinearLayout police_contacts;
+    FirebaseAuth auth;
+    FirebaseUser  user;
     OnBackPressedListener onBackpressedListener;
     DrawerLayout drawer;
 
@@ -49,6 +53,9 @@ public class Dashboard extends AppCompatActivity {
         navView = findViewById(R.id.navView);
         drawer = findViewById(R.id.drawer1);
         police_contacts = findViewById(R.id.linearLayout);
+
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
 
         //set default home fragment and its title
         //Objects.requireNonNull(getSupportActionBar()).setTitle("");
@@ -122,10 +129,12 @@ public class Dashboard extends AppCompatActivity {
                         break;
                     case R.id.nav_logout:
                         navView.getMenu().getItem(5).setCheckable(false);
-                        //auth.signOut();
-                        //startActivity(new Intent(Dashboard.this , Splash.class));
+                        auth.signOut();
+                        startActivity(new Intent(Dashboard.this , Splash.class));
                         finish();
                         break;
+
+
 
                 }
                 return true;
