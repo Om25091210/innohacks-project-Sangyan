@@ -1,6 +1,16 @@
 package com.alpha.innohacksproject;
 
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -29,6 +39,9 @@ import androidx.fragment.app.Fragment;
 
 import com.alpha.innohacksproject.Home.Home;
 import com.alpha.innohacksproject.login.Login;
+
+import com.alpha.innohacksproject.Fragment.DistrictData;
+
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -55,6 +68,8 @@ public class Dashboard extends AppCompatActivity {
     String redirect_to="";
     Toolbar toolbar;
     NavigationView navView;
+    LinearLayout police_contacts;
+    OnBackPressedListener onBackpressedListener;
     DrawerLayout drawer;
     int downspeed;
     int upspeed;
@@ -89,6 +104,7 @@ public class Dashboard extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         navView = findViewById(R.id.navView);
         drawer = findViewById(R.id.drawer1);
+        police_contacts = findViewById(R.id.linearLayout);
 
         setSupportActionBar(toolbar);
 
@@ -149,6 +165,7 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
+
       /*  notice_victim.setOnClickListener(v->{
             if(valid_ver) {
                 Intent intent = new Intent(Dashboard.this, NoticemainAdmin.class);
@@ -156,7 +173,7 @@ public class Dashboard extends AppCompatActivity {
             }else{
                 Toast.makeText(this, "Please Update the app", Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
 
         writ_police.setOnClickListener(v -> {
             if(valid_ver) {
@@ -164,9 +181,10 @@ public class Dashboard extends AppCompatActivity {
             }else{
                 Toast.makeText(this, "Please Update the app", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
        /* police_contacts.setOnClickListener(v -> Dashboard.this.getSupportFragmentManager()
+        police_contacts.setOnClickListener(v -> Dashboard.this.getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
                 .add(R.id.drawer, new DistrictData(),"dashboard_frag")
@@ -330,6 +348,35 @@ public class Dashboard extends AppCompatActivity {
             startActivity(i);
             finish();
         }
+
+    @Override
+    public void onBackPressed() {
+        Fragment test = getSupportFragmentManager().findFragmentByTag("dashboard_frag");
+        if (test != null && test.isVisible()) {
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            if (fm.getBackStackEntryCount() > 0) {
+                fm.popBackStack();
+            }
+            ft.commit();
+        } else {
+            finish();
+            super.onBackPressed();
+        }
+    }
+
+    public interface OnBackPressedListener {
+        void doBack();
+    }
+
+    public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
+        this.onBackpressedListener = onBackPressedListener;
+    }
+
+    @Override
+    protected void onDestroy() {
+        onBackpressedListener = null;
+        super.onDestroy();
     }
 
 }

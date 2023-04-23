@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/bg_data_card"
+    android:backgroundTint="@color/gray"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginStart="10dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ic_locate_mark"/>
+
+    <TextView
+        android:id="@+id/district_name"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:layout_marginStart="25dp"
+        android:gravity="center_vertical"
+        android:fontFamily="@font/quicksand_medium"
+        android:layout_height="match_parent"/>
+
+
+</LinearLayout>
