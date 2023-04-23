@@ -41,11 +41,6 @@ public class Splash extends AppCompatActivity {
 
         user_reference= FirebaseDatabase.getInstance().getReference().child("users");
 
-    /*    if(RootUtil.isDeviceRooted()){
-            Toast.makeText(this, "Device Rooted", Toast.LENGTH_SHORT).show();
-            Splash.this.finish();
-        }*/
-
         new Handler(Looper.myLooper()).postDelayed(() -> {
             if(user!=null){
 

@@ -270,22 +270,6 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/all_rights"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/quicksand_bold"
-                    android:gravity="center"
-                    android:text="@string/all_rights_reserved_by_cg_police"
-                    android:textColor="@color/use_blue"
-                    android:textStyle="bold"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout10" />
-
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <com.google.android.material.navigation.NavigationView
