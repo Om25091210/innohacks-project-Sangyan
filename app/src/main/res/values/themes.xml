@@ -23,12 +23,12 @@
     <style name="CircularProgress" parent="Theme.AppCompat.Light">
         <item name="colorAccent">@color/use_orange</item>
     </style>
-<!--    <style name="expandedBarTextStyle" parent="AppTheme">
-        &lt;!&ndash; Customize your theme here. &ndash;&gt;
+    <style name="expandedBarTextStyle" parent="AppTheme">
+        <!-- Customize your theme here. -->
         <item name="android:textSize">0sp</item>
         <item name="android:textColor">@android:color/transparent</item>
 
-    </style>-->
+    </style>
     <style name="CustomShapeAppearance">
         <item name="neumorph_cornerFamily">oval</item>
     </style>

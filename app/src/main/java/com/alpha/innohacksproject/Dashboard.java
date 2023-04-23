@@ -27,6 +27,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.alpha.innohacksproject.Home.Home;
 import com.alpha.innohacksproject.login.Login;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -172,19 +173,20 @@ public class Dashboard extends AppCompatActivity {
                 .addToBackStack(null)
                 .commit());*/
 
-        /*case_diary.setOnClickListener(v -> {
+        case_diary.setOnClickListener(v -> {
             if(valid_ver) {
                 if (redirect_to.equals("home")) {
                     Intent intent = new Intent(Dashboard.this, Home.class);
                     startActivity(intent);
                 } else if (redirect_to.equals("p_home")) {
-                  *//*  Intent intent = new Intent(Dashboard.this, p_Home.class);
-                    startActivity(intent);*//*
+                    Log.e("users","user login");
+                   /* Intent intent = new Intent(Dashboard.this, p_Home.class);
+                    startActivity(intent);*/
                 }
             }else{
                 Toast.makeText(this, "Please Update the app", Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
     }
 
     private void check_version() {
