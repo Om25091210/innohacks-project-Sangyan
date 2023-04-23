@@ -26,55 +26,59 @@ import kotlin.random.Random
 private const val CHANNEL_ID="my_channel"
 
 class FirebaseService : FirebaseMessagingService() {
-private const val CHANNEL_ID="my_channel"
+    private val CHANNEL_ID = "my_channel"
 
-class FirebaseService : FirebaseMessagingService(){
+    class FirebaseService : FirebaseMessagingService() {
 
-    override fun onNewToken(p0: String) {
-        super.onNewToken(p0)
-        Log.e("newToken", p0)
-    }
+        override fun onNewToken(p0: String) {
+            super.onNewToken(p0)
+            Log.e("newToken", p0)
+        }
 
-    @SuppressLint("UnspecifiedImmutableFlag")
-    override fun onMessageReceived(message: RemoteMessage) {
-        super.onMessageReceived(message)
-       /* //val intent = Intent(this, temp_notification::class.java)
+        @SuppressLint("UnspecifiedImmutableFlag")
+        override fun onMessageReceived(message: RemoteMessage) {
+            super.onMessageReceived(message)
+            /* //val intent = Intent(this, temp_notification::class.java)
         Log.e("logging_info", message.data["key"] + "")
         Log.e("logging_info", message.data["section"] + "")
         intent.putExtra("sending_msg_data", "" + message.data["key"])*/
-        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        val notificationID = Random.nextInt()
+            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            val notificationID = Random.nextInt()
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            createNotifionChannel(notificationManager)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                //   createNotifionChannel(notificationManager)
+            }
+
+            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            val intent = Intent(this, TempNotification::class.java)
+            Log.e("logging_info", message.data["key"] + "")
+            Log.e("logging_info", message.data["section"] + "")
+            intent.putExtra("sending_msg_data", "" + message.data["key"])
+            /* val notificationManager=getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        val notificationID = Random.nextInt()*/
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                //createNotifionChannel(notificationManager)
+            }
+
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         }
-
-        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        val intent= Intent(this, TempNotification::class.java)
-        Log.e("logging_info",message.data["key"]+"")
-        Log.e("logging_info",message.data["section"]+"")
-        intent.putExtra("sending_msg_data",""+message.data["key"])
-        val notificationManager=getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        val notificationID = Random.nextInt()
-
-        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
-            createNotifionChannel(notificationManager)
-        }
-
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-
-        val pendingIntent = PendingIntent.getActivity(
+    }
+}
+/*
+ val pendingIntent = PendingIntent.getActivity(
             applicationContext,
             notificationID,
          //   intent,
             PendingIntent.FLAG_MUTABLE
         )
-        //TODO: Change mutable to flag update current
-            intent,
+       TODO: Change mutable to flag update current
+            intent
             PendingIntent.FLAG_MUTABLE
         )
+*/
 
-        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+/*        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle(message.data["title"])
             .setContentText(message.data["body"])
             .setStyle(NotificationCompat.BigTextStyle().bigText(message.data["body"]))
@@ -156,4 +160,4 @@ class FirebaseService : FirebaseMessagingService(){
             }
         notificationManager.createNotificationChannel(channel)
     }
-}
+}*/
