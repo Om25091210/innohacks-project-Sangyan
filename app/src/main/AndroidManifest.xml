@@ -14,13 +14,26 @@
         android:theme="@style/Theme.Design.Light.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".Dashboard"
+            android:name=".login.Select_stations"
+            android:exported="false" />
+        <activity
+            android:name=".login.Select_District"
+            android:exported="false" />
+        <activity
+            android:name=".login.Login"
+            android:exported="false" />
+        <activity
+            android:name=".Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Dashboard"
+            android:exported="false">
         </activity>
     </application>
 

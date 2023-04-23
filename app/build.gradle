@@ -2,7 +2,6 @@ plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
 }
-
 android {
     compileSdk 32
 
@@ -26,6 +25,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -34,6 +36,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.firebase:firebase-database-ktx:20.2.0'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.3.0'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.1.2'
+    implementation 'com.google.firebase:firebase-messaging:23.1.2'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -42,5 +47,14 @@ dependencies {
     //Scalable size unit(support for different size screens)
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
-
+    //edittext
+    implementation 'com.github.simformsolutions:SSCustomEditTextOutLineBorder:1.0.15'
+    //pin view
+    implementation 'io.github.chaosleung:pinview:1.4.4'
+    // motion toast
+    implementation 'com.github.Spikeysanju:MotionToast:1.4'
+    //volley for calling a website without opening a website
+    implementation 'com.android.volley:volley:1.2.1'
+    //browser
+    implementation 'androidx.browser:browser:1.4.0'
 }
