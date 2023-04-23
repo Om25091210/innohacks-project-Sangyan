@@ -10,7 +10,6 @@ import java.lang.Exception
 
 
 const val TOPIC = "/topics/myTopic2"
-
 class topic {
     private val TAG="MainActivity"
 
@@ -34,10 +33,10 @@ class topic {
 
         try{
             val response= RetrofirInstance.api.postNotification(notification)
-            if(response.isSuccessful){
+            if(response.isSuccess){
                 Log.d(TAG,"Response:${Gson().toJson(response)}")
             }else{
-                Log.e(TAG,response.errorBody().toString())
+                Log.e(TAG,response.error.toString())
             }
 
         }catch (e: Exception){

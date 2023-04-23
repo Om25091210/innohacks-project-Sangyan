@@ -9,7 +9,9 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import android.util.Log
+
 import android.widget.RemoteViews
+
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.alpha.innohacksproject.R
@@ -23,6 +25,9 @@ import kotlin.random.Random
 
 private const val CHANNEL_ID="my_channel"
 
+class FirebaseService : FirebaseMessagingService() {
+private const val CHANNEL_ID="my_channel"
+
 class FirebaseService : FirebaseMessagingService(){
 
     override fun onNewToken(p0: String) {
@@ -33,7 +38,18 @@ class FirebaseService : FirebaseMessagingService(){
     @SuppressLint("UnspecifiedImmutableFlag")
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
+       /* //val intent = Intent(this, temp_notification::class.java)
+        Log.e("logging_info", message.data["key"] + "")
+        Log.e("logging_info", message.data["section"] + "")
+        intent.putExtra("sending_msg_data", "" + message.data["key"])*/
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        val notificationID = Random.nextInt()
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotifionChannel(notificationManager)
+        }
+
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val intent= Intent(this, TempNotification::class.java)
         Log.e("logging_info",message.data["key"]+"")
         Log.e("logging_info",message.data["section"]+"")
@@ -50,6 +66,10 @@ class FirebaseService : FirebaseMessagingService(){
         val pendingIntent = PendingIntent.getActivity(
             applicationContext,
             notificationID,
+         //   intent,
+            PendingIntent.FLAG_MUTABLE
+        )
+        //TODO: Change mutable to flag update current
             intent,
             PendingIntent.FLAG_MUTABLE
         )
@@ -67,6 +87,49 @@ class FirebaseService : FirebaseMessagingService(){
         notificationManager.notify(notificationID, notification)
 
         //Initialize Database
+        if (message.data["section"].equals("data")) {
+            val reference = FirebaseDatabase.getInstance().reference.child("data")
+            reference.child(message.data["key"] + "")
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()) {
+                            reference.child("" + message.data["key"]).child("sent").setValue("1")
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {}
+                })
+        } else if (message.data["section"].equals("notice")) {
+            val reference = FirebaseDatabase.getInstance().reference.child("notice")
+            reference.child(message.data["key"] + "")
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()) {
+                            reference.child("" + message.data["key"]).child("sent").setValue("1")
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {}
+                })
+        }
+
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createNotifionChannel(notificationManager: NotificationManager) {
+        val channelName = "ChannelName"
+        val channel =
+            NotificationChannel(
+                CHANNEL_ID,
+                channelName,
+                NotificationManager.IMPORTANCE_HIGH
+            ).apply {
+
+                description = "My channel description"
+                enableLights(true)
+                lightColor = Color.GREEN
+                
         if(message.data["section"].equals("data")) {
             val reference = FirebaseDatabase.getInstance().reference.child("data")
             reference.child(message.data["key"]+"").addListenerForSingleValueEvent(object :
@@ -87,7 +150,6 @@ class FirebaseService : FirebaseMessagingService(){
         val channelName="ChannelName"
         val channel=
             NotificationChannel(CHANNEL_ID,channelName, NotificationManager.IMPORTANCE_HIGH).apply {
-
                 description="My channel description"
                 enableLights(true)
                 lightColor= Color.GREEN

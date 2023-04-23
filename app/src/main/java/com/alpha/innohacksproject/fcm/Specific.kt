@@ -7,7 +7,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class Specific {
-
     private val TAG="send"
 
     fun noti(name:String,phone:String,token:String,key:String,section:String){
@@ -26,10 +25,10 @@ class Specific {
 
         try{
             val response= RetrofirInstance.api.postNotification(notification)
-            if(response.isSuccessful){
+            if(response.isSuccess){
                 Log.d(TAG,"Response:${Gson().toJson(response)}")
             }else{
-                Log.e(TAG,response.errorBody().toString())
+                Log.e(TAG,response.error.toString())
             }
 
         }catch (e:Exception){

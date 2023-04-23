@@ -69,6 +69,8 @@ public class Dashboard extends AppCompatActivity {
     Toolbar toolbar;
     NavigationView navView;
     LinearLayout police_contacts;
+    FirebaseAuth auth;
+    FirebaseUser  user;
     OnBackPressedListener onBackpressedListener;
     DrawerLayout drawer;
     int downspeed;
@@ -106,6 +108,8 @@ public class Dashboard extends AppCompatActivity {
         drawer = findViewById(R.id.drawer1);
         police_contacts = findViewById(R.id.linearLayout);
 
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
         setSupportActionBar(toolbar);
 
         getting_device_token();
@@ -159,6 +163,8 @@ public class Dashboard extends AppCompatActivity {
                         startActivity(new Intent(Dashboard.this , Splash.class));
                         finish();
                         break;
+
+
 
                 }
                 return true;
